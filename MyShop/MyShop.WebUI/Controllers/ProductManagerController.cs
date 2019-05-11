@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyShop.Core.Models;
+using MyShop.Core.ViewModels;
 using MyShop.DataAcess.InMemory;
 
 namespace MyShop.WebUI.Controllers
@@ -11,9 +12,11 @@ namespace MyShop.WebUI.Controllers
     public class ProductManagerController : Controller
     {
         ProductRepository context;
+        ProductCategoryRepository productCategories;
         public ProductManagerController()
         {
             context = new ProductRepository();
+            productCategories = new ProductCategoryRepository();
         }
         // GET: ProductManager
         public ActionResult Index()
@@ -24,19 +27,24 @@ namespace MyShop.WebUI.Controllers
         [HttpGet]
         public ActionResult CreateProduct()
         {
-            Product p = new Product();
-            return View(p);
+            ProductManagerViewModel productViewModel = new ProductManagerViewModel();
+            productViewModel.Product = new Product();
+            productViewModel.ProductCategories = productCategories.Collection();
+            return View(productViewModel);
+            //Product p = new Product();
+            //return View(p);
         }
         [HttpPost]
-        public ActionResult CreateProduct(Product p)
+        public ActionResult CreateProduct(ProductManagerViewModel p)
         {
+            
             if (!ModelState.IsValid)
             {
-                return View(p);
+                return View(p.Product);
             }
             else
             {
-                context.Insert(p);
+                context.Insert(p.Product);
                 context.Commit();
                 return RedirectToAction("Index");
             }
@@ -51,11 +59,14 @@ namespace MyShop.WebUI.Controllers
             }
             else
             {
-                return View(product);
+                ProductManagerViewModel productViewModel = new ProductManagerViewModel();
+                productViewModel.Product = product;
+                productViewModel.ProductCategories = productCategories.Collection();
+                return View(productViewModel);
             }
         }
         [HttpPost]
-        public ActionResult EditProduct(Product p, String Id)
+        public ActionResult EditProduct(ProductManagerViewModel p, String Id)
         {
             var productToEdit = context.Find(Id);
             if (productToEdit == null)
@@ -70,11 +81,11 @@ namespace MyShop.WebUI.Controllers
                 }
                 else
                 {
-                    productToEdit.Category = p.Category;
-                    productToEdit.Description = p.Description;
-                    productToEdit.Image = p.Image;
-                    productToEdit.Price = p.Price;
-                    productToEdit.Name = p.Name;
+                    productToEdit.Category = p.Product.Category;
+                    productToEdit.Description = p.Product.Description;
+                    productToEdit.Image = p.Product.Image;
+                    productToEdit.Price = p.Product.Price;
+                    productToEdit.Name = p.Product.Name;
                     context.Commit();
                     return RedirectToAction("Index");
                 }
