@@ -37,7 +37,7 @@ namespace MyShop.WebUI.Controllers
             //return View(p);
         }
         [HttpPost]
-        public ActionResult CreateProduct(ProductManagerViewModel p,HttpPostedFile file)
+        public ActionResult CreateProduct(ProductManagerViewModel p,HttpPostedFileBase file)
         {
             
             if (!ModelState.IsValid)
@@ -49,7 +49,7 @@ namespace MyShop.WebUI.Controllers
                 if(file!=null)
                 {
                     p.Product.Image = p.Product.Id + Path.GetExtension(file.FileName);
-                    file.SaveAs(Server.MapPath("//Content//ProductImages//"));
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//")+p.Product.Image);
                 }
                 context.Insert(p.Product);
                 context.Commit();
@@ -73,7 +73,7 @@ namespace MyShop.WebUI.Controllers
             }
         }
         [HttpPost]
-        public ActionResult EditProduct(ProductManagerViewModel e, String Id, HttpPostedFile file)
+        public ActionResult EditProduct(ProductManagerViewModel e, String Id, HttpPostedFileBase file)
         {
             var productToEdit = context.Find(Id);
             if (productToEdit == null)
@@ -91,7 +91,7 @@ namespace MyShop.WebUI.Controllers
                     if (file != null)
                     {
                         e.Product.Image = e.Product.Id + Path.GetExtension(file.FileName);
-                        file.SaveAs(Server.MapPath("//Content//ProductImages//"));
+                        file.SaveAs(Server.MapPath("//Content//ProductImages//")+e.Product.Image);
                     }
                     productToEdit.Category = e.Product.Category;
                     productToEdit.Description = e.Product.Description;
