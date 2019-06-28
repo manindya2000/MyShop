@@ -21,11 +21,15 @@ namespace MyShop.WebUI.Controllers
         private ApplicationUserManager _userManager;
         private IRepository<Customer> customerRepository;
 
-        //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, IRepository<Customer> customerRepository )
+        //public AccountController()
+        //{
+
+        //}
+        //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         //{
         //    UserManager = userManager;
         //    SignInManager = signInManager;
-        //    this.customerRepository = customerRepository;
+        //  //  this.customerRepository = customerRepository;
         //}
         public AccountController(IRepository<Customer> customerRepository)
         {
@@ -159,7 +163,7 @@ namespace MyShop.WebUI.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    //Register the customer model
+                   // Register the customer model
                     Customer customer = new Customer()
                     {
                         City = model.City,
