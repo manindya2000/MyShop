@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201906280653110_AfterError.Designer.cs">
       <DependentUpon>201906280653110_AfterError.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201906281136193_AddOrders.cs" />
+    <Compile Include="Migrations\201906281136193_AddOrders.Designer.cs">
+      <DependentUpon>201906281136193_AddOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SQLRepository.cs" />
@@ -97,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906280653110_AfterError.resx">
       <DependentUpon>201906280653110_AfterError.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201906281136193_AddOrders.resx">
+      <DependentUpon>201906281136193_AddOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
