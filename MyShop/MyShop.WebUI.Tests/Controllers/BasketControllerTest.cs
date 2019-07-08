@@ -41,9 +41,9 @@ namespace MyShop.WebUI.Tests.Controllers
             IRepository<Basket> baskets = new MockContext<Basket>();
             IRepository<Product> products = new MockContext<Product>();
             IRepository<Order> orders = new MockContext<Order>();
-            products.Insert(new Product() {Id="1 ",Price=10.00m});
-            products.Insert(new Product() { Id = "2 ", Price = 20.00m });
-            products.Insert(new Product() { Id = "3 ", Price = 30.00m });
+            products.Insert(new Product() {Id="1",Price=10.00m});
+            products.Insert(new Product() { Id = "2", Price = 20.00m });
+            products.Insert(new Product() { Id = "3", Price = 30.00m });
             Basket basket = new Basket();
             basket.BasketItems.Add(new BasketItem() { ProductId="1",Quantity=1});
             basket.BasketItems.Add(new BasketItem() { ProductId = "2", Quantity = 1 });
